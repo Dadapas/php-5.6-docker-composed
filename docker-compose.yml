@@ -1,0 +1,45 @@
+version: '3.0'
+
+services:
+    myadmin:
+      depends_on:
+        - mysql
+      image: phpmyadmin/phpmyadmin
+      links:
+        - mysql:mysql_db_server
+      ports:
+        - 8387:80
+      volumes:
+        - ./config/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+      environment:
+        PMA_HOST: mysql
+        PMA_USER: dbuser
+        PMA_PASSWORD: dbpassword
+        PMA_PORT: 3306
+    mysql:
+        image: mysql:5
+        ports:
+            - "3617:3306"
+        volumes:
+            - mysql-data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: mypasswd
+            MYSQL_DATABASE: symfony
+            MYSQL_USER: dbuser
+            MYSQL_PASSWORD: dbpassword
+        restart: always
+    web:
+        depends_on:
+          - mysql
+        build: .
+        ports:
+            - "9876:80"
+        volumes:
+            - ./www:/var/www/html/
+            - '~/.gitconfig:/root/.gitconfig'
+            - ./config/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+        restart: always
+volumes:
+    mysql-data:
+    # vendor:
+    # var:
