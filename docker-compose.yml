@@ -24,7 +24,7 @@ services:
             - mysql-data:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: mypasswd
-            MYSQL_DATABASE: symfony
+            MYSQL_DATABASE: mydadabase
             MYSQL_USER: dbuser
             MYSQL_PASSWORD: dbpassword
         restart: always
