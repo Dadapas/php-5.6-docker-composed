@@ -24,8 +24,20 @@ echo "Hello world";
 // mysql by default
 $pdo = new PDO('mysql:host=mysql;dbname=mydatabase', 'dbuser', 'dbpassword');
 
-$pdo->query('SELECT * FROM ....');
+// $pdo->query('SELECT * FROM ....');
+
+// OR Using mysqli
+
+$mysqli = new mysqli("mysql","dbuser","my_password","mydatabase");
+
+// Check connection
+if ($mysqli -> connect_errno) {
+  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+  exit();
+}
 ```
+
+When you have error 500 delete .htaccess file
 
 ## Stop docker server
 ```sh
