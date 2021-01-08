@@ -24,7 +24,7 @@ services:
             - mysql-data:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: mypasswd
-            MYSQL_DATABASE: mydadabase
+            MYSQL_DATABASE: mydatabase
             MYSQL_USER: dbuser
             MYSQL_PASSWORD: dbpassword
         restart: always
@@ -36,7 +36,7 @@ services:
             - "9876:80"
         volumes:
             - ./www:/var/www/html/
-            - '~/.gitconfig:/root/.gitconfig'
+            # - '~/.gitconfig:/root/.gitconfig'
             - ./config/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
         restart: always
 volumes:
